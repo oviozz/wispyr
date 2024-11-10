@@ -2,6 +2,7 @@
 import {SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import {ForwardRefExoticComponent, RefAttributes} from "react";
 import {LucideProps} from "lucide-react";
+import Link from "next/link";
 
 interface SidebarItemProps {
     title: string,
@@ -15,10 +16,10 @@ export default function SidebarItem({title, url, icon: Icon }: SidebarItemProps)
     return (
         <SidebarMenuItem key={title}>
             <SidebarMenuButton className={"font-medium hover:bg-blue-100/50 dark:hover:bg-blue-100/20 text-md"} asChild>
-                <a href={url}>
+                <Link href={url}>
                     <Icon className={"text-blue-500"} />
                     <span>{title}</span>
-                </a>
+                </Link>
             </SidebarMenuButton>
 
 

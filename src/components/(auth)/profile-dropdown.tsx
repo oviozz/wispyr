@@ -2,16 +2,21 @@
 "use client"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {LogOut, ChevronsUpDown} from "lucide-react"
+import {LogOut, ChevronsUpDown, Settings} from "lucide-react"
 import {
     DropdownMenu,
-    DropdownMenuContent,
+    DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-export default function ProfileDropdown(){
+
+interface ProfileDropDownProps {
+    _align?: "start" | "center" | "end"
+}
+
+export default function ProfileDropdown({_align = "start"}: ProfileDropDownProps){
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -39,7 +44,16 @@ export default function ProfileDropdown(){
                     />
                 </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end">
+            <DropdownMenuContent className="w-56 rounded-xl" align={_align}>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                    <Settings className="mr-1 h-4 w-4" />
+                    <span>Settings</span>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+
                 <Button variant={"destructive"} className={"w-full hover:bg-red-"}>
                     <LogOut className="h-4 w-4" />
                     <span className={"font-semibold"}>Log out</span>
