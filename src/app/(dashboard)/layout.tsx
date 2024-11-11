@@ -15,13 +15,15 @@ export default function DashboardLayout({children}: Readonly<{ children: React.R
             enableSystem
             disableTransitionOnChange>
             <SidebarProvider>
-                <RootSidebar />
-                <main className={"flex flex-col w-full"}>
-                    <Navbar />
-                    <div className={""}>
-                        {children}
+                <div className={"flex h-screen w-full"}>
+                    <RootSidebar />
+                    <div className={"flex flex-col w-full"}>
+                        <Navbar />
+                        <div className={"overflow-hidden"}>
+                            {children}
+                        </div>
                     </div>
-                </main>
+                </div>
             </SidebarProvider>
         </ThemeProvider>
     );

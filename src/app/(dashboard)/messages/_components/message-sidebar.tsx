@@ -6,9 +6,9 @@ import MessageLists from "@/app/(dashboard)/messages/_components/message-lists";
 export default function MessageSidebar(){
 
     return (
-        <div className={"flex flex-col gap-1 max-w-80 border-r"}>
+        <div className={"flex flex-col h-full max-w-80 border-r"}>
 
-            <div className={"py-4 space-y-2 px-2.5"}>
+            <div className={"py-4 space-y-2 px-3 border-b "}>
                 <div className="relative">
                     <Input
                         placeholder="Search"
@@ -22,9 +22,11 @@ export default function MessageSidebar(){
                 <MessageTabs />
             </div>
 
-            <div className={"space-y-3"}>
-                <h2 className={"ml-2.5 text-sm text-muted-foreground"}>Your Messages</h2>
-                <MessageLists />
+            <div className="flex flex-col flex-1 min-h-0">
+                <h2 className="px-3 py-2 text-sm text-muted-foreground">Your Messages</h2>
+                <div className="flex-1 overflow-y-auto">
+                    <MessageLists />
+                </div>
             </div>
 
         </div>

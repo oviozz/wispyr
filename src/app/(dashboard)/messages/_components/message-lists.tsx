@@ -1,5 +1,4 @@
 
-import {ScrollArea} from "@/components/ui/scroll-area";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {cn} from "@/lib/utils";
 
@@ -24,10 +23,10 @@ const messages = [
 export default function MessageLists(){
 
     return (
-        <ScrollArea>
-            <div className="space-y-2">
-                {messages.map((message) => (
-                    <div key={message.id} className={cn("flex items-center space-x-4 hover:bg-gray-100/80 dark:hover:bg-gray-100/10 px-2.5 py-1.5")}>
+        <div className="space-y-2">
+            {messages.map((message) => (
+                <div key={message.id} className={cn("flex justify-between items-center space-x-4 hover:bg-gray-100/80 dark:hover:bg-gray-100/10 px-3 py-2")}>
+                    <div className={"flex items-center gap-3"}>
                         <Avatar>
                             <AvatarFallback>{message.name.charAt(0)}</AvatarFallback>
                         </Avatar>
@@ -35,17 +34,18 @@ export default function MessageLists(){
                             <h3 className={cn("text-sm font-semibold",
                                 message.unread > 0 && "text-blue-500"
                             )}>{message.name}</h3>
-                            <p className="text-xs text-muted-foreground truncate">{message.message}</p>
+                            <p className="text-sm text-muted-foreground truncate">{message.message}</p>
                         </div>
-                        {message.unread > 0 && (
-                            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-white font-medium text-xs text-primary-foreground">
+                    </div>
+
+                    {message.unread > 0 && (
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-white font-medium text-xs text-primary-foreground">
                               {message.unread}
                             </span>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </ScrollArea>
+                    )}
+                </div>
+            ))}
+        </div>
     )
 
 }
