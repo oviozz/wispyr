@@ -8,6 +8,7 @@ export default function MessageSidebar(){
     return (
         <div className={"flex flex-col h-full max-w-80 border-r"}>
 
+            {/*message tab search*/}
             <div className={"py-4 space-y-2 px-3 border-b "}>
                 <div className="relative">
                     <Input
@@ -22,9 +23,10 @@ export default function MessageSidebar(){
                 <MessageTabs />
             </div>
 
+            {/*message list*/}
             <div className="flex flex-col flex-1 min-h-0">
                 <h2 className="px-3 py-2 text-sm text-muted-foreground">Your Messages</h2>
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1 overflow-y-auto hide-scrollbar">
                     <MessageLists />
                 </div>
             </div>

@@ -1,6 +1,7 @@
 
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {cn} from "@/lib/utils";
+import Link from "next/link";
 
 const messages = [
     { id: 1, name: "Alice Johnson", avatar: "/placeholder.svg?height=32&width=32", message: "Hey, how's it going?", time: "2m ago", unread: 2 },
@@ -25,25 +26,27 @@ export default function MessageLists(){
     return (
         <div className="space-y-2">
             {messages.map((message) => (
-                <div key={message.id} className={cn("flex justify-between items-center space-x-4 hover:bg-gray-100/80 dark:hover:bg-gray-100/10 px-3 py-2")}>
-                    <div className={"flex items-center gap-3"}>
-                        <Avatar>
-                            <AvatarFallback>{message.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                            <h3 className={cn("text-sm font-semibold",
-                                message.unread > 0 && "text-blue-500"
-                            )}>{message.name}</h3>
-                            <p className="text-sm text-muted-foreground truncate">{message.message}</p>
+                <Link key={message.id} href={`/messages/${message.id}`}>
+                    <div className={cn("flex justify-between items-center space-x-4 hover:bg-gray-100/80 dark:hover:bg-gray-100/10 px-3 py-2 hover:cursor-pointer")}>
+                        <div className={"flex items-center gap-3"}>
+                            <Avatar>
+                                <AvatarFallback>{message.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                                <h3 className={cn("text-sm font-semibold",
+                                    message.unread > 0 && "text-blue-500"
+                                )}>{message.name}</h3>
+                                <p className="text-sm text-muted-foreground truncate">{message.message}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    {message.unread > 0 && (
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-white font-medium text-xs text-primary-foreground">
-                              {message.unread}
-                            </span>
-                    )}
-                </div>
+                        {message.unread > 0 && (
+                            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-white font-medium text-xs text-primary-foreground">
+                          {message.unread}
+                        </span>
+                        )}
+                    </div>
+                </Link>
             ))}
         </div>
     )
