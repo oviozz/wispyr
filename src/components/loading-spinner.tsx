@@ -1,16 +1,16 @@
 
-
+import { ImSpinner } from "react-icons/im";
 import { cva, type VariantProps } from 'class-variance-authority'
-import clsx from 'clsx'
+import {cn} from "@/lib/utils";
 
 const spinnerVariants = cva(
-    'inline-block rounded-full border-4 border-t-blue-500 animate-spin',
+    'text-white animate-spin',
     {
         variants: {
             size: {
-                sm: 'w-4 h-4 border-2',
-                md: 'w-6 h-6 border-4',
-                lg: 'w-8 h-8 border-4',
+                sm: 'w-4 h-4',
+                md: 'w-5 h-5',
+                lg: 'w-8 h-8',
             },
         },
         defaultVariants: {
@@ -24,5 +24,5 @@ interface LoadingSpinnerProps extends VariantProps<typeof spinnerVariants> {
 }
 
 export const LoadingSpinner = ({ size, className }: LoadingSpinnerProps) => {
-    return <div className={clsx(spinnerVariants({ size }), className)} />
+    return <ImSpinner className={cn(spinnerVariants({ size }), className)} />
 }

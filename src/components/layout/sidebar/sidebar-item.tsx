@@ -1,25 +1,33 @@
 
 import {SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
-import {ForwardRefExoticComponent, RefAttributes} from "react";
+import {ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
 import {LucideProps} from "lucide-react";
 import Link from "next/link";
+import {cn} from "@/lib/utils";
 
 interface SidebarItemProps {
     title: string,
-    url: string,
+    url?: string,
     icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
+    dialog: ReactNode
 }
-export default function SidebarItem({title, url, icon: Icon }: SidebarItemProps){
+export default function SidebarItem({title, url, icon: Icon, dialog }: SidebarItemProps){
 
     const friend_request: number = 5;
 
     return (
         <SidebarMenuItem key={title}>
-            <SidebarMenuButton className={"font-medium hover:bg-blue-100/50 dark:hover:bg-blue-100/20 text-md"} asChild>
-                <Link href={url}>
-                    <Icon className={"text-blue-500"} />
-                    <span>{title}</span>
-                </Link>
+            <SidebarMenuButton className={cn("font-medium text-md",
+                url && !dialog && "hover:bg-blue-100/50 dark:hover:bg-blue-100/20"
+            )} asChild>
+                { (url && !dialog) ? (
+                    <Link href={url}>
+                        <Icon className={"text-blue-500"} />
+                        <span>{title}</span>
+                    </Link>
+                ) : (
+                    <div>{dialog}</div>
+                )}
             </SidebarMenuButton>
 
 

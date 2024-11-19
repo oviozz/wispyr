@@ -1,30 +1,42 @@
 
-import React from "react";
+import {ReactNode} from "react";
 import "../globals.css";
 import RootSidebar from "@/components/layout/sidebar/root-sidebar";
 import {SidebarProvider} from "@/components/ui/sidebar";
-import {ThemeProvider} from "@/components/theme-provider";
 import Navbar from "@/components/layout/navbar";
+import TanstackProviders from "@/lib/providers/tanstack-providers";
+import {verifySession} from "@/app/(auth)/_actions/session";
+import LoggedUserProvider from "@/lib/providers/loggeduser-provider";
+import {Id} from "../../../convex/_generated/dataModel";
+import {redirect} from "next/navigation";
 
-export default function DashboardLayout({children}: Readonly<{ children: React.ReactNode; }>) {
+interface DashboardLayoutProps {
+    readonly children: ReactNode
+}
+export default async function DashboardLayout({children}: DashboardLayoutProps) {
+
+    const session = await verifySession();
+    const userId = session?.userId as Id<"users"> | null
+
+    if (!userId){
+        redirect("/");
+    }
 
     return (
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange>
-            <SidebarProvider>
-                <div className={"flex h-screen w-full"}>
-                    <RootSidebar />
-                    <div className={"flex flex-col w-full"}>
-                        <Navbar />
-                        <div className={"overflow-hidden"}>
-                            {children}
+        <TanstackProviders>
+            <LoggedUserProvider userId={userId}>
+                <SidebarProvider>
+                    <div className={"flex h-screen w-full"}>
+                        <RootSidebar />
+                        <div className={"flex flex-col w-full"}>
+                            <Navbar />
+                            <div className={"overflow-hidden"}>
+                                {children}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </SidebarProvider>
-        </ThemeProvider>
+                </SidebarProvider>
+            </LoggedUserProvider>
+        </TanstackProviders>
     );
 }

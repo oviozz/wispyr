@@ -1,5 +1,4 @@
 
-"use client"
 
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
@@ -7,7 +6,14 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/componen
 import {Button} from "@/components/ui/button";
 import { FaSmile  } from "react-icons/fa";
 
-export function EmojiPickerDialog() {
+interface EmojiPickerDialogProps {
+    onEmojiSelect: (emoji: string) => void
+}
+export function EmojiPickerDialog({onEmojiSelect}: EmojiPickerDialogProps) {
+
+    const handleEmojiSelect = (emoji: { native: string }) => {
+        onEmojiSelect(emoji.native);
+    };
 
     return (
         <DropdownMenu>
@@ -17,7 +23,7 @@ export function EmojiPickerDialog() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className={"p-0"}>
-                <Picker data={data} onEmojiSelect={console.log} />
+                <Picker data={data} onEmojiSelect={handleEmojiSelect} />
             </DropdownMenuContent>
         </DropdownMenu>
     )

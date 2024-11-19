@@ -7,7 +7,7 @@ import {MessageCircle, Users, Hash } from "lucide-react"
 
 const tabOptions = [
     { value: "all", title: "All", icon: MessageCircle },
-    { value: "people", title: "People", icon: Users },
+    { value: "direct", title: "Direct", icon: Users },
     { value: "groups", title: "Groups", icon: Hash }
 ]
 

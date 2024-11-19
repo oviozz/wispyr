@@ -2,7 +2,7 @@
 import BrandTitle from "@/components/brand-title";
 import {Sidebar, SidebarFooter, SidebarHeader, SidebarRail} from "@/components/ui/sidebar";
 import SidebarContent from "@/components/layout/sidebar/sidebar-contents";
-import ProfileDropdown from "@/components/(auth)/profile-dropdown";
+import ProfileDropdown from "@/components/profile-dropdown";
 
 export default function RootSidebar(){
 
@@ -11,7 +11,7 @@ export default function RootSidebar(){
             <SidebarHeader className={"p-3"}>
                 <BrandTitle />
             </SidebarHeader>
-            <SidebarContent />
+            <SidebarContent/>
             <SidebarRail />
 
             <SidebarFooter className={"border-t"}>

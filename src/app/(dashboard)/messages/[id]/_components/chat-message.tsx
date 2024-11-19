@@ -1,6 +1,6 @@
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {cn} from "@/lib/utils";
+import {cn, timeAgo} from "@/lib/utils";
 
 
 interface ChatMessageProps {
@@ -26,12 +26,10 @@ export default function ChatMessage({ avatarImage, senderName, timestamp, conten
                 <div className="flex items-center space-x-2">
                     <span className="text-sm font-semibold">{currentUser ? "You" : senderName}</span>
                     <span>•</span>
-                    <span className="text-xs text-muted-foreground">{timestamp}</span>
+                    <span className="text-xs text-muted-foreground">{timeAgo(timestamp)}</span>
                 </div>
                 <div className="border dark:border-gray-700 bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-200 rounded-lg p-3">
-                    <p className="text-sm">
-                        {content}
-                    </p>
+                    <p className="text-sm whitespace-pre-wrap break-words overflow-hidden max-h-40">{content}</p>
                 </div>
             </div>
         </div>

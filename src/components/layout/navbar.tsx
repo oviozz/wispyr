@@ -1,14 +1,14 @@
 
 "use client"
 
-import {Button} from "@/components/ui/button";
-import {BellIcon, Search} from "lucide-react";
 import {ThemeToggle} from "@/components/theme-toggle";
 import * as React from "react";
 import {SidebarTrigger} from "@/components/ui/sidebar";
-import ProfileDropdown from "@/components/(auth)/profile-dropdown";
+import ProfileDropdown from "@/components/profile-dropdown";
 import {usePathname} from "next/navigation";
 import {getTitle} from "@/lib/utils";
+import NotificationDialog from "@/components/notification-dialog";
+
 
 export default function Navbar(){
 
@@ -24,16 +24,7 @@ export default function Navbar(){
             </div>
 
             <div className={"flex items-center gap-4"}>
-                <Button variant="ghost" size="icon" className="relative">
-                    <BellIcon className="h-5 w-5" />
-                    <div className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs dark:text-white text-primary-foreground">
-                        3
-                    </div>
-                </Button>
-
-                <Button variant={"ghost"} size={"icon"}>
-                    <Search className={"h-5 w-5"} />
-                </Button>
+                <NotificationDialog />
 
                 <div className={"hidden sm:flex items-center gap-3"}>
                     <ThemeToggle />

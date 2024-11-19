@@ -1,4 +1,6 @@
 
+"use client"
+
 import {
     SidebarContent, SidebarGroup,
     SidebarGroupContent, SidebarGroupLabel,
@@ -7,8 +9,8 @@ import {
 import {sidebar_config} from "@/data/sidebar-config";
 import SidebarItem from "@/components/layout/sidebar/sidebar-item";
 
-
 export default function SidebarContents(){
+
 
     return (
         <SidebarContent className={"divide-y"}>
@@ -24,6 +26,7 @@ export default function SidebarContents(){
                                         title={side_links.title}
                                         url={side_links.url}
                                         icon={side_links.icon}
+                                        dialog={side_links.dialog}
                                     />
                                 ))}
                             </SidebarMenu>
