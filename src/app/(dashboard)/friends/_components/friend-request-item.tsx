@@ -88,10 +88,10 @@ export default function FriendRequestItem({ friend_info, userId, hasRequested, r
                             Requested
                         </>
                     ) : (
-                        <span>Friend</span>
+                        <span>Follow</span>
                     )
                 ) : (
-                    <span>Follow</span>
+                    <span>Friend</span>
                 )}
             </Button>
 

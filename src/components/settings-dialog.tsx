@@ -171,7 +171,7 @@ export default function SettingsDialog() {
                                 </Label>
                             </Button>
                             <p className="text-xs text-muted-foreground">
-                                Supported formats: JPEG, PNG (max 5MB)
+                                Supported formats: PNG (max 5MB)
                             </p>
                         </div>
                         {profilePic?.imageFile && (

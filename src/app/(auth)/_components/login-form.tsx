@@ -48,7 +48,7 @@ export default function LoginForm(){
         <form onSubmit={handleSubmit(loginHandler)} className="space-y-6">
             <div className={"space-y-1"}>
                 <Label>
-                    Username
+                    Email
                 </Label>
                 <div>
                     <Input

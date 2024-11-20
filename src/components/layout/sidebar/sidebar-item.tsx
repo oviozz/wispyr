@@ -1,5 +1,5 @@
 
-import {SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
+import {SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import {ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
 import {LucideProps} from "lucide-react";
 import Link from "next/link";
@@ -13,7 +13,7 @@ interface SidebarItemProps {
 }
 export default function SidebarItem({title, url, icon: Icon, dialog }: SidebarItemProps){
 
-    const friend_request: number = 5;
+    // const friend_request: number = 5;
 
     return (
         <SidebarMenuItem key={title}>
@@ -31,11 +31,11 @@ export default function SidebarItem({title, url, icon: Icon, dialog }: SidebarIt
             </SidebarMenuButton>
 
 
-            { friend_request && title.toLowerCase().includes("friends") && (
-                <SidebarMenuBadge className={"peer-hover/menu-button:text-blue-700 bg-blue-100 text-blue-700 border border-blue-300 font-semibold rounded-lg"}>
-                    {friend_request}
-                </SidebarMenuBadge>
-            )}
+            {/*{ friend_request && title.toLowerCase().includes("friends") && (*/}
+            {/*    <SidebarMenuBadge className={"peer-hover/menu-button:text-blue-700 bg-blue-100 text-blue-700 border border-blue-300 font-semibold rounded-lg"}>*/}
+            {/*        {friend_request}*/}
+            {/*    </SidebarMenuBadge>*/}
+            {/*)}*/}
         </SidebarMenuItem>
     )
 }
