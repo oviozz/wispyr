@@ -107,7 +107,7 @@ export default function ChatHeader({ room_details }: ChatHeaderProps) {
                             </TooltipTrigger>
                             <TooltipContent>
                                 {details.retention
-                                    ? "Messages will be deleted after 5 min"
+                                    ? "Messages will be deleted after 1 min"
                                     : "Messages are not being retained"}
                             </TooltipContent>
                         </Tooltip>
