@@ -33,7 +33,8 @@ export default function MainMessageContent({roomId}: MainMessageContentProps) {
 
     const { success, code, message, room_details } = getChatRoomDetails;
 
-    if (!success && code){
+
+    if (!success && code === "ROOM_NOT_FOUND"){
         toast.error(message);
         notFound();
     }

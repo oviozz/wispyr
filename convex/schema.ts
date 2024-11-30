@@ -2,6 +2,15 @@
 import {defineSchema, defineTable} from "convex/server";
 import {v} from "convex/values";
 
+const PublicKeySchema = v.object({
+    e: v.string(),
+    n: v.string()
+});
+
+const PrivateKeySchema = v.object({
+    d: v.string(),
+    n: v.string()
+});
 export default defineSchema({
     users: defineTable({
         firstName: v.string(),
@@ -20,6 +29,8 @@ export default defineSchema({
         max_participants: v.optional(v.number()),
         lastMessageId: v.optional(v.id("messages")),
         retention: v.optional(v.boolean()),
+        private_key: PrivateKeySchema,
+        public_key: PublicKeySchema,
     }),
 
     participants: defineTable({

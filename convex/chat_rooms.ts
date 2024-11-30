@@ -1,6 +1,8 @@
 import {mutation, query} from "./_generated/server";
 import {v} from "convex/values";
 import {getUserById} from "./users";
+import {decrypt_message, generateTwoKeyPair} from "../src/rsa/rsa-encryption";
+import {PrivateKey} from "../src/lib/types/messages";
 
 export const getUserChatRooms = query({
     args: {
@@ -27,10 +29,17 @@ export const getUserChatRooms = query({
 
                 if (chat_room.lastMessageId) {
                     const lastMessage = await ctx.db.get(chat_room.lastMessageId);
+                    const chatroom_privateKey = chat_room?.private_key;
+
+                    const privateKeyFromConvex: PrivateKey = {
+                        d: BigInt(chatroom_privateKey.d),
+                        n: BigInt(chatroom_privateKey.n)
+                    };
+
                     return {
                         ...chat_room,
                         lastMessage: {
-                            content: lastMessage?.content || "",
+                            content: decrypt_message(lastMessage?.content  || "", privateKeyFromConvex),
                             senderId: lastMessage?.sender_id,
                             timestamp: lastMessage?._creationTime,
                         }                    };
@@ -47,13 +56,24 @@ export const getUserChatRooms = query({
 
 export const getChatRoomById = query({
     args: {
-        chatRoomId: v.id("chat_rooms")
+        chatRoomId: v.string()
     },
     handler: async (ctx, args) => {
         try {
-            const chatRoomDetail  = await ctx.db.get(args.chatRoomId)
 
-            if (!chatRoomDetail ) {
+            const checkRoomValidID = ctx.db.normalizeId("chat_rooms", args.chatRoomId);
+
+            if (!checkRoomValidID) {
+                return {
+                    success: false,
+                    code: "ROOM_NOT_FOUND",
+                    message: "Invalid Chat Room"
+                }
+            }
+
+            const chatRoomDetail  = await ctx.db.get(checkRoomValidID)
+
+            if (!chatRoomDetail) {
                 return {
                     success: false,
                     code: "ROOM_NOT_FOUND",
@@ -65,7 +85,7 @@ export const getChatRoomById = query({
                 .query("participants")
                 .withIndex("by_chatroom")
                 .filter((q) =>
-                    q.eq(q.field("chat_room_id"), args.chatRoomId)
+                    q.eq(q.field("chat_room_id"), checkRoomValidID)
                 )
                 .order("desc")
                 .collect()
@@ -136,11 +156,24 @@ export const createChatRoom = mutation({
         }
 
         try {
+            const { publicKey, privateKey } = generateTwoKeyPair();
+
+            const privateKeyForConvex = {
+                d: privateKey.d.toString(),
+                n: privateKey.n.toString()
+            };
+            const publicKeyForConvex = {
+                e: publicKey.e.toString(),
+                n: publicKey.n.toString()
+            };
+
             const chatroomId = await ctx.db.insert("chat_rooms", {
                 room_name,
                 admin_id,
                 max_participants,
-                retention
+                retention,
+                private_key: privateKeyForConvex,
+                public_key: publicKeyForConvex
             })
 
             await ctx.db.insert("participants", {

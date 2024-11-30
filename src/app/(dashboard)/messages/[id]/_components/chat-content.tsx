@@ -70,7 +70,7 @@ export default function ChatContent({ roomId, userId }: ChatContentProps) {
                 className="flex-1 w-full overflow-y-auto p-4 scroll-smooth"
             >
                 <div className="space-y-7">
-                    {messages.map((message) => {
+                    {messages?.map((message) => {
                         const isCurrentUser = userId === message.sender_id;
                         return (
                             <ChatMessage

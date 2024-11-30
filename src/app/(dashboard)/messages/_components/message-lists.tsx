@@ -8,6 +8,7 @@ import { api } from "../../../../../convex/_generated/api";
 import { useAuth } from "@/hooks/useAuth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePathname } from "next/navigation";
+import {MessageSquareLock} from "lucide-react";
 
 interface MessageListProps {
     closeSidebar?: () => void
@@ -83,7 +84,10 @@ export default function MessageLists({closeSidebar}: MessageListProps) {
                     </Link>
                 ))
             ) : (
-                <h2>No chat has been made</h2>
+                <div className={"flex flex-col items-center mt-20 px-3 text-neutral-400 animate-pulse"}>
+                    <MessageSquareLock className={"h-8 w-8"} />
+                    <span className={"font-semibold"}>No rooms has been made</span>
+                </div>
             )}
         </div>
     );

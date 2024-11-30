@@ -208,7 +208,7 @@ export default function CreateChatButton() {
                                 )}
                             </div>
                             <p className="text-xs text-muted-foreground">
-                                If checked, the messages will be deleted after 5 minutes.
+                                If checked, the messages will be deleted after 1 minutes.
                             </p>
                         </div>
 
